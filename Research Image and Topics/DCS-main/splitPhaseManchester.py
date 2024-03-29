@@ -1,8 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
 N = 10  # Number of bits
-n = np.random.randint(2, size=N)  # Random bit generation
-print(n)
+
+# Directly specify the binary sequence
+n = np.array([1, 0, 1, 1, 0, 1, 0, 0, 1, 1])  # Example binary sequence
+print("Binary sequence:", n)
+
 # Binary to Manchester Conversion
 nnn = []
 for bit in n:
@@ -11,6 +15,7 @@ for bit in n:
     else:
         nn = [-1, 1]
     nnn.extend(nn)
+
 # Manchester Coding Pulse Shaping
 i = 0
 l = 0.5
@@ -23,8 +28,13 @@ for j in range(len(t)):
         y.append(nnn[i])
         i += 1
         l += 0.5
+
+# Plotting
 plt.plot(t, y, linewidth=2)  # Linewidth 2 for clear visualization
 plt.axis([0, N, -1.5, 1.5])  # Axis set-up
 plt.grid(True)
 plt.title("Manchester Coding")
+plt.xticks(np.arange(N), np.arange(N))
+plt.xlabel('Bit Index')
+plt.ylabel('Amplitude')
 plt.show()
